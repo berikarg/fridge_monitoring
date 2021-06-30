@@ -5,7 +5,7 @@
 extern const char* ssid;
 extern const char* password;
 
-extern String serverName;
+extern String server_name;
 extern String serverPath;
 
 extern const int serverPort;

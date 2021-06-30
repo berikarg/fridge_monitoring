@@ -43,6 +43,7 @@ void loop() {
     float temperature = get_temperature();
     Serial.print("Temperature: ");
     Serial.println(temperature);
+    send_temperature(temperature);
     previousMillis = currentMillis;
   }
 

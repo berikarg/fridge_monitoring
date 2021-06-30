@@ -11,9 +11,9 @@
 const char* ssid = "Lucent";
 const char* password = "018384584";
 
-//String serverName = "192.168.202.12";   // REPLACE WITH YOUR Raspberry Pi IP ADDRESS
-//String serverName = "192.168.5.147";
-String serverName = "192.168.1.64"; 
+//String server_name = "192.168.202.12";   // REPLACE WITH YOUR Raspberry Pi IP ADDRESS
+//String server_name = "192.168.5.147";
+String server_name = "192.168.1.64"; 
 String serverPath = "/upload.php";     // The default serverPath should be upload.php
 
 const int serverPort = 80;

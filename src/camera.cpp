@@ -61,9 +61,9 @@ String sendPhoto() {
     ESP.restart();
   }
   
-  Serial.println("Connecting to server: " + serverName);
+  Serial.println("Connecting to server: " + server_name);
 
-  if (client.connect(serverName.c_str(), serverPort)) {
+  if (client.connect(server_name.c_str(), serverPort)) {
     Serial.println("Connection successful!");    
     String head = "--fkeeper\r\nContent-Disposition: form-data; name=\"imageFile\"; filename=\"esp32-cam.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n";
     String tail = "\r\n--fkeeper--\r\n";
@@ -73,7 +73,7 @@ String sendPhoto() {
     uint32_t totalLen = imageLen + extraLen;
   
     client.println("POST " + serverPath + " HTTP/1.1");
-    client.println("Host: " + serverName);
+    client.println("Host: " + server_name);
     client.println("Content-Length: " + String(totalLen));
     client.println("Content-Type: multipart/form-data; boundary=fkeeper");
     client.println();
@@ -119,7 +119,7 @@ String sendPhoto() {
     Serial.println(getBody);
   }
   else {
-    getBody = "Connection to " + serverName +  " failed.";
+    getBody = "Connection to " + server_name +  " failed.";
     Serial.println(getBody);
   }
   return getBody;
