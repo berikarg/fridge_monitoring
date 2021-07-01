@@ -50,8 +50,8 @@ int send_temperature(float temperature)
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");
     
     // Prepare your HTTP POST request data
-    String http_request_data = "api_key=" + api_key_value + "&sensor=" + sensor_name
-                          + "&location=" + sensor_location + "&value1=" + String(temperature) + "";
+    String http_request_data = "&sensor=" + sensor_name + "&location=" + sensor_location
+                             + "&temperature=" + String(temperature) + "";
     Serial.print("httpRequestData: ");
     Serial.println(http_request_data);
     
