@@ -38,8 +38,8 @@ void setup() {
 
 void loop() {
   unsigned long currentMillis = millis();
-  if (currentMillis - previousMillis >= timerInterval) {
-    // put check temperature here
+  if (currentMillis - previousMillis >= timerInterval) 
+  {
     float temperature = get_temperature();
     Serial.print("Temperature: ");
     Serial.println(temperature);
@@ -49,6 +49,7 @@ void loop() {
 
   if (takeNewPhoto)
   {
+      send_door_status();
       sendPhoto();
       takeNewPhoto = false;
   }

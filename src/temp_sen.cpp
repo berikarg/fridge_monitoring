@@ -6,8 +6,7 @@
 
 OneWire ds(TEMP_SEN_PIN); // Создаем объект OneWire для шины 1-Wire, с помощью которого будет осуществляться работа с датчиком
 
-const String temperature_url = "http://192.168.1.64/post-esp-data.php";
-const String api_key_value = "tPmAT5Ab3j7F9";
+const String temperature_url = "http://192.168.1.64/post-temperature.php";
 const String sensor_name = "DS18b20";
 const String sensor_location = "Fridge 1";
 

@@ -4,6 +4,8 @@
 #include "camera.h"
 
 boolean takeNewPhoto = false;
+const String server_name = "192.168.1.64"; 
+const String server_path = "/upload-photo.php";
 
 void camera_setup()
 {
@@ -72,7 +74,7 @@ String sendPhoto() {
     uint32_t extraLen = head.length() + tail.length();
     uint32_t totalLen = imageLen + extraLen;
   
-    client.println("POST " + serverPath + " HTTP/1.1");
+    client.println("POST " + server_path + " HTTP/1.1");
     client.println("Host: " + server_name);
     client.println("Content-Length: " + String(totalLen));
     client.println("Content-Type: multipart/form-data; boundary=fkeeper");

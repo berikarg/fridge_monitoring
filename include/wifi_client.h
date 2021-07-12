@@ -4,10 +4,6 @@
 
 extern const char* ssid;
 extern const char* password;
-
-extern String server_name;
-extern String serverPath;
-
 extern const int serverPort;
 
 extern WiFiClient client;
