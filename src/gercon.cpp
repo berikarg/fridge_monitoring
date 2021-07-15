@@ -7,7 +7,7 @@
 bool is_door_open = false;
 
 const String door_url = "http://192.168.1.64/post-door-status.php";
-const String door_location = "Fridge 2";
+const String door_location = "Fridge 1";
 
 void gercon_init()
 {

@@ -2,6 +2,7 @@
 #include "esp_camera.h"
 #include "wifi_client.h"
 #include "camera.h"
+#include "main.h"
 
 boolean takeNewPhoto = false;
 const String server_name = "192.168.1.64"; 
@@ -67,7 +68,8 @@ String sendPhoto() {
 
   if (client.connect(server_name.c_str(), serverPort)) {
     Serial.println("Connection successful!");    
-    String head = "--fkeeper\r\nContent-Disposition: form-data; name=\"imageFile\"; filename=\"esp32-cam.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n";
+    String head = "--fkeeper\r\nContent-Disposition: form-data; name=\"imageFile\"; filename=\"" + 
+                    fridge_id + ".jpg\"\r\nContent-Type: image/jpeg\r\n\r\n";
     String tail = "\r\n--fkeeper--\r\n";
 
     uint32_t imageLen = fb->len;
