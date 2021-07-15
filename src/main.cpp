@@ -1,12 +1,9 @@
 /*
-  Rui Santos
-  Complete project details at https://RandomNerdTutorials.com/esp32-cam-post-image-photo-server/
-  
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of this software and associated documentation files.
-  
-  The above copyright notice and this permission notice shall be included in all
-  copies or substantial portions of the Software.
+Fridge monitoring system
+Features:
+1) Periodically collects temperature, sends it to a Raspberry Pi, which in turn sends it to Qaratal server
+2) Senses when fridge's door opens and closes, takes a picture each time, 
+   sends it to a Raspberry Pi, which in turn sends it to Qaratal server
 */
 
 #include <Arduino.h>
@@ -18,10 +15,12 @@
 #include "wifi_client.h"
 #include "gercon.h"
 #include "temp_sen.h"
+#include "main.h"
 
-const int timerInterval = 30000;    // time between each HTTP POST image
-unsigned long previousMillis = 0;   // last time image was sent
-
+// Globals
+const int timerInterval = 30000;    // time between each HTTP POST temperature
+unsigned long previousMillis = 0;   // last time temperature was sent
+const String fridge_id = "Fridge_1";// used to identify location, will be sent with photos
 
 void setup() {
   //WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); 
@@ -38,8 +37,8 @@ void setup() {
 
 void loop() {
   unsigned long currentMillis = millis();
-  if (currentMillis - previousMillis >= timerInterval) {
-    // put check temperature here
+  if (currentMillis - previousMillis >= timerInterval) 
+  {
     float temperature = get_temperature();
     Serial.print("Temperature: ");
     Serial.println(temperature);
@@ -49,6 +48,7 @@ void loop() {
 
   if (takeNewPhoto)
   {
+      send_door_status();
       sendPhoto();
       takeNewPhoto = false;
   }

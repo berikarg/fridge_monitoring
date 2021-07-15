@@ -2,8 +2,11 @@
 #include "esp_camera.h"
 #include "wifi_client.h"
 #include "camera.h"
+#include "main.h"
 
 boolean takeNewPhoto = false;
+const String server_name = "192.168.1.64"; 
+const String server_path = "/upload-photo.php";
 
 void camera_setup()
 {
@@ -65,14 +68,15 @@ String sendPhoto() {
 
   if (client.connect(server_name.c_str(), serverPort)) {
     Serial.println("Connection successful!");    
-    String head = "--fkeeper\r\nContent-Disposition: form-data; name=\"imageFile\"; filename=\"esp32-cam.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n";
+    String head = "--fkeeper\r\nContent-Disposition: form-data; name=\"imageFile\"; filename=\"" + 
+                    fridge_id + ".jpg\"\r\nContent-Type: image/jpeg\r\n\r\n";
     String tail = "\r\n--fkeeper--\r\n";
 
     uint32_t imageLen = fb->len;
     uint32_t extraLen = head.length() + tail.length();
     uint32_t totalLen = imageLen + extraLen;
   
-    client.println("POST " + serverPath + " HTTP/1.1");
+    client.println("POST " + server_path + " HTTP/1.1");
     client.println("Host: " + server_name);
     client.println("Content-Length: " + String(totalLen));
     client.println("Content-Type: multipart/form-data; boundary=fkeeper");
