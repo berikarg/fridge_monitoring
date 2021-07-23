@@ -19,8 +19,6 @@
 #define HREF_GPIO_NUM     23
 #define PCLK_GPIO_NUM     22
 
-extern boolean takeNewPhoto;
-
 /*  Function Prototypes   */
-String sendPhoto();
+String send_photo();
 void camera_setup();

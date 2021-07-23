@@ -4,7 +4,6 @@
 #include "camera.h"
 #include "main.h"
 
-boolean takeNewPhoto = false;
 const String server_name = "192.168.1.64"; 
 const String server_path = "/upload-photo.php";
 
@@ -52,7 +51,7 @@ void camera_setup()
 }
 
 
-String sendPhoto() {
+String send_photo() {
   String getAll;
   String getBody;
 

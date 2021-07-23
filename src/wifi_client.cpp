@@ -8,7 +8,10 @@
 //const char* ssid = "HP2400";
 //const char* password = "018384584qwer";
 
-const char* ssid = "Lucent";
+//const char* ssid = "Lucent";
+//const char* password = "018384584";
+
+const char* ssid = "test1";
 const char* password = "018384584";
 const int serverPort = 80;
 
@@ -22,7 +25,8 @@ void wifi_init()
   Serial.println(ssid);
   WiFi.begin(ssid, password);  
   while (WiFi.status() != WL_CONNECTED) {
-    Serial.print(".");
+    //Serial.print(".");
+    Serial.println(WiFi.status());
     delay(500);
   }
   Serial.println();

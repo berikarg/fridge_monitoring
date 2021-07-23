@@ -5,6 +5,7 @@
 #include "gercon.h"
 
 bool is_door_open = false;
+bool check_gercon = false;
 
 const String door_url = "http://192.168.1.64/post-door-status.php";
 const String door_location = "Fridge 1";
@@ -24,16 +25,7 @@ void gercon_init()
 
 static void IRAM_ATTR gercon_isr(void * arg)
 {
-    if (digitalRead(GERCON_PIN)) // door has been opened
-    {
-        is_door_open = true;
-        takeNewPhoto = true;
-    }
-    else if (!digitalRead(GERCON_PIN)) // door has been closed 
-    {
-        is_door_open = false;
-        takeNewPhoto = true;
-    }
+    check_gercon = true;
 }
 
 int send_door_status()

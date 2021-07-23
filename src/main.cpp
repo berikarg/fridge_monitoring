@@ -18,12 +18,12 @@ Features:
 #include "main.h"
 
 // Globals
-const int timerInterval = 30000;    // time between each HTTP POST temperature
-unsigned long previousMillis = 0;   // last time temperature was sent
-const String fridge_id = "Fridge_1";// used to identify location, will be sent with photos
+const int timer_interval = 30000;    // time between each HTTP POST temperature
+unsigned long previous_millis = 0;   // last time temperature was sent
+const String fridge_id = "Fridge_1"; // used to identify location, will be sent with photos
 
 void setup() {
-  //WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); 
+  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); //disable broen-out detector
   Serial.begin(115200);
   
   wifi_init();
@@ -32,25 +32,29 @@ void setup() {
 
   gercon_init();
 
-  sendPhoto(); 
+  send_photo(); 
 }
 
 void loop() {
-  unsigned long currentMillis = millis();
-  if (currentMillis - previousMillis >= timerInterval) 
+  unsigned long current_millis = millis();
+  if (current_millis - previous_millis >= timer_interval) 
   {
     float temperature = get_temperature();
     Serial.print("Temperature: ");
     Serial.println(temperature);
     send_temperature(temperature);
-    previousMillis = currentMillis;
+    previous_millis = current_millis;
   }
 
-  if (takeNewPhoto)
+  if (check_gercon)
   {
-      send_door_status();
-      sendPhoto();
-      takeNewPhoto = false;
+    delay(GERCON_DELAY);
+    if (digitalRead(GERCON_PIN)) // door has been opened
+        is_door_open = true;
+    else if (!digitalRead(GERCON_PIN)) // door has been closed 
+        is_door_open = false;
+    send_door_status();
+    send_photo();
+    check_gercon = false;
   }
-
 }
