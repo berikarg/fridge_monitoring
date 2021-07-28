@@ -25,6 +25,8 @@ const String fridge_id = "Fridge_1"; // used to identify location, will be sent 
 void setup() {
   WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); //disable broen-out detector
   Serial.begin(115200);
+
+  temperature_sensor_init();
   
   wifi_init();
 
