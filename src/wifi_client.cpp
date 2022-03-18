@@ -2,17 +2,8 @@
 #include <WiFi.h>
 #include "wifi_client.h"
 
-//const char* ssid = "Galaxy S20798e";
-//const char* password = "gfmu3112";
-
-//const char* ssid = "HP2400";
-//const char* password = "018384584qwer";
-
-//const char* ssid = "Lucent";
-//const char* password = "018384584";
-
-const char* ssid = "test1";
-const char* password = "018384584";
+const char* ssid = "ENTERYOURSSIDHERE";
+const char* password = "ENTERYOURPASSWORDHERE";
 const int serverPort = 80;
 
 WiFiClient client;
